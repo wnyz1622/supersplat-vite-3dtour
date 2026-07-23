@@ -1,0 +1,18 @@
+const JOINTTYPE_FIXED = "fixed";
+const JOINTTYPE_BALL = "ball";
+const JOINTTYPE_HINGE = "hinge";
+const JOINTTYPE_SLIDER = "slider";
+const JOINTTYPE_6DOF = "6dof";
+const MOTION_FREE = "free";
+const MOTION_LIMITED = "limited";
+const MOTION_LOCKED = "locked";
+export {
+  JOINTTYPE_6DOF,
+  JOINTTYPE_BALL,
+  JOINTTYPE_FIXED,
+  JOINTTYPE_HINGE,
+  JOINTTYPE_SLIDER,
+  MOTION_FREE,
+  MOTION_LIMITED,
+  MOTION_LOCKED
+};

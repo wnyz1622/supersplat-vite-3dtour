@@ -1,0 +1,124 @@
+<!doctype html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <title>SuperSplat Vite Project</title>
+        <style>
+            html,
+            body {
+                width: 100%;
+                height: 100%;
+                margin: 0;
+                overflow: hidden;
+                background: #0d0f12;
+            }
+
+            #app {
+                display: block;
+                width: 100%;
+                height: 100%;
+                background: #0d0f12;
+            }
+        </style>
+      <script type="module" crossorigin src="/assets/index-pJep6n3X.js"></script>
+      <link rel="stylesheet" crossorigin href="/assets/index-W1apUBUH.css">
+    </head>
+    <body>
+        <canvas id="app"></canvas>
+        <div id="hotspots" aria-label="Points of interest"></div>
+        <div id="view-controls" class="view-controls" aria-label="View controls">
+            <button id="reset-view-btn" class="view-control-btn" type="button" aria-label="Reset camera view">
+                <img id="reset-view-icon" src="/media/Reset_default.svg" alt="" aria-hidden="true" />
+            </button>
+            <button id="fullscreen-btn" class="view-control-btn" type="button" aria-label="Toggle fullscreen">
+                <img id="fullscreen-icon" src="/media/Fullscreen_default.svg" alt="" aria-hidden="true" />
+            </button>
+        </div>
+        <div id="hotspot-popup" class="hotspot-popup" data-open="false" role="dialog" aria-modal="false">
+            <div class="hotspot-popup-header">
+                <img id="hotspot-popup-icon" class="hotspot-popup-icon" src="/media/Info_default.png" alt="" aria-hidden="true" />
+                <div id="hotspot-popup-title" class="hotspot-popup-title">Title</div>
+                <button id="hotspot-popup-close" class="hotspot-popup-close" type="button" aria-label="Close">
+                    <img src="/media/Close.png" alt="" aria-hidden="true" />
+                </button>
+            </div>
+            <div class="hotspot-popup-body">
+                <p id="hotspot-popup-description" class="hotspot-popup-description"></p>
+                <div id="hotspot-body-gallery" class="hotspot-body hotspot-body-gallery">
+                    <div class="gallery-frame">
+                        <button id="gallery-prev" class="gallery-nav gallery-nav-prev" type="button" aria-label="Previous image">
+                            <img src="/media/arrow_left.svg" alt="" aria-hidden="true" />
+                        </button>
+                        <img id="gallery-image" class="gallery-image" src="" alt="" />
+                        <button id="gallery-next" class="gallery-nav gallery-nav-next" type="button" aria-label="Next image">
+                            <img src="/media/arrow_right.svg" alt="" aria-hidden="true" />
+                        </button>
+                    </div>
+                    <div class="gallery-meta">
+                        <span id="gallery-caption" class="gallery-caption"></span>
+                        <span id="gallery-counter" class="gallery-counter"></span>
+                    </div>
+                </div>
+                <div id="hotspot-body-video" class="hotspot-body hotspot-body-video">
+                    <div class="media-frame">
+                        <video id="hotspot-video" class="media-embed" controls playsinline></video>
+                    </div>
+                </div>
+                <div id="hotspot-body-pdf" class="hotspot-body hotspot-body-pdf">
+                    <div class="media-frame media-frame-pdf">
+                        <iframe id="hotspot-pdf" class="media-embed" title="Document preview"></iframe>
+                    </div>
+                    <a id="hotspot-pdf-link" class="hotspot-open-link" href="#" target="_blank" rel="noopener">Open in new tab</a>
+                </div>
+            </div>
+        </div>
+        <div id="loader" role="status" aria-live="polite">
+            <div class="loader-mark" aria-hidden="true"></div>
+            <div class="loader-copy">
+                <div class="loader-title">Loading splat</div>
+                <div id="loader-message" class="loader-message">Preparing scene...</div>
+                <div class="loader-progress" aria-hidden="true">
+                    <div id="loader-progress-bar"></div>
+                </div>
+            </div>
+        </div>
+        <div id="controls" aria-label="Navigation controls">
+            <div class="control-primary">
+                <div class="key-grid" aria-hidden="true">
+                    <span></span>
+                    <kbd>W</kbd>
+                    <span></span>
+                    <kbd>A</kbd>
+                    <kbd>S</kbd>
+                    <kbd>D</kbd>
+                </div>
+                <div class="control-primary-copy">
+                    <span class="control-action">Move</span>
+                    <span class="control-detail">WASD or arrows</span>
+                </div>
+            </div>
+            <div class="control-list">
+                <div class="control-row">
+                    <span class="control-shortcut">
+                        <kbd>Q</kbd>
+                        <kbd>E</kbd>
+                    </span>
+                    <span class="control-label">Down / up</span>
+                </div>
+                <div class="control-row">
+                    <span class="control-token">Drag</span>
+                    <span class="control-label">Orbit</span>
+                </div>
+                <div class="control-row">
+                    <span class="control-token">Right drag</span>
+                    <span class="control-label">Pan</span>
+                </div>
+                <div class="control-row">
+                    <span class="control-token">Wheel</span>
+                    <span class="control-label">Zoom</span>
+                </div>
+            </div>
+        </div>
+    </body>
+</html>

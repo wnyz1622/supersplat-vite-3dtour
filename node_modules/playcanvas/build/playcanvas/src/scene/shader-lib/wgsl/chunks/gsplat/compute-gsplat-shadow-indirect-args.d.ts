@@ -1,0 +1,2 @@
+export const computeGsplatShadowIndirectArgsSource: string;
+export default computeGsplatShadowIndirectArgsSource;

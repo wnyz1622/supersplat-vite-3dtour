@@ -1,0 +1,2 @@
+declare const _default: "\n// Modify the final splat fragment color in the forward pass.\n// Parameters:\n//   gaussianUV - position of the fragment within the gaussian footprint: (0,0) at the splat\n//                center, length 1 at the edge where the splat is clipped\n//   color      - rgb: splat color, a: fragment alpha after gaussian falloff, before\n//                premultiplication\nvoid modifySplatColor(vec2 gaussianUV, inout vec4 color) {\n    // Example: color.rgb *= 0.5; // darken all splats\n}\n";
+export default _default;

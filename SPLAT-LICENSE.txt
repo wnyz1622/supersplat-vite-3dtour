@@ -1,0 +1,8 @@
+This license applies to the included splat asset files in public/splat.
+
+Title: Grand Courts, Art Gallery of NSW
+Author: EggMan28 (https://superspl.at/user?id=eggman)
+Source: https://superspl.at/scene/4fc17f06
+License: CC Attribution (Creative Commons Attribution)
+License URL: http://creativecommons.org/licenses/by/4.0/
+Requirements: Author must be credited. Commercial use is allowed.

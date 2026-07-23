@@ -1,0 +1,66 @@
+[
+    {
+        "id": "gallery-info",
+        "type": "info",
+        "title": "About the Grand Courts",
+        "description": "The Grand Courts are the historic heart of the Art Gallery of New South Wales, lined with soaring skylit ceilings and 19th- and 20th-century collection works. This capture preserves the space as a navigable 3D scene.",
+        "position": [
+            3.3,
+            2,
+            -3.3
+        ]
+    },
+    {
+        "id": "gallery-photos",
+        "type": "gallery",
+        "title": "Gallery Views",
+        "description": "A few placeholder frames of the space — replace with real photography in public/hotspots.json.",
+        "position": [
+            5.2,
+            2.2,
+            -1
+        ],
+        "images": [
+            {
+                "src": "data:image/svg+xml;utf8,%3Csvg%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%20width%3D%22640%22%20height%3D%22480%22%3E%3Crect%20width%3D%22640%22%20height%3D%22480%22%20fill%3D%22%234a5568%22%2F%3E%3Ctext%20x%3D%2250%25%22%20y%3D%2250%25%22%20font-family%3D%22Inter%2C%20sans-serif%22%20font-size%3D%2228%22%20fill%3D%22%23ffffff%22%20text-anchor%3D%22middle%22%20dominant-baseline%3D%22middle%22%3EImage%201%3C%2Ftext%3E%3C%2Fsvg%3E",
+                "caption": "Grand Court — north wall"
+            },
+            {
+                "src": "data:image/svg+xml;utf8,%3Csvg%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%20width%3D%22640%22%20height%3D%22480%22%3E%3Crect%20width%3D%22640%22%20height%3D%22480%22%20fill%3D%22%232d3748%22%2F%3E%3Ctext%20x%3D%2250%25%22%20y%3D%2250%25%22%20font-family%3D%22Inter%2C%20sans-serif%22%20font-size%3D%2228%22%20fill%3D%22%23ffffff%22%20text-anchor%3D%22middle%22%20dominant-baseline%3D%22middle%22%3EImage%202%3C%2Ftext%3E%3C%2Fsvg%3E",
+                "caption": "Grand Court — skylight ceiling"
+            },
+            {
+                "src": "data:image/svg+xml;utf8,%3Csvg%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%20width%3D%22640%22%20height%3D%22480%22%3E%3Crect%20width%3D%22640%22%20height%3D%22480%22%20fill%3D%22%233c4655%22%2F%3E%3Ctext%20x%3D%2250%25%22%20y%3D%2250%25%22%20font-family%3D%22Inter%2C%20sans-serif%22%20font-size%3D%2228%22%20fill%3D%22%23ffffff%22%20text-anchor%3D%22middle%22%20dominant-baseline%3D%22middle%22%3EImage%203%3C%2Ftext%3E%3C%2Fsvg%3E",
+                "caption": "Grand Court — sculpture hall"
+            },
+            {
+                "src": "data:image/svg+xml;utf8,%3Csvg%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%20width%3D%22640%22%20height%3D%22480%22%3E%3Crect%20width%3D%22640%22%20height%3D%22480%22%20fill%3D%22%231a202c%22%2F%3E%3Ctext%20x%3D%2250%25%22%20y%3D%2250%25%22%20font-family%3D%22Inter%2C%20sans-serif%22%20font-size%3D%2228%22%20fill%3D%22%23ffffff%22%20text-anchor%3D%22middle%22%20dominant-baseline%3D%22middle%22%3EImage%204%3C%2Ftext%3E%3C%2Fsvg%3E",
+                "caption": "Grand Court — entry stairs"
+            }
+        ]
+    },
+    {
+        "id": "gallery-video",
+        "type": "video",
+        "title": "Walkthrough Video",
+        "description": "Sample embed — replace videoUrl in public/hotspots.json with a real clip.",
+        "position": [
+            3,
+            1.3,
+            -2
+        ],
+        "videoUrl": "https://commondatastorage.googleapis.com/gtv-videos-bucket/sample/BigBuckBunny.mp4"
+    },
+    {
+        "id": "gallery-pdf",
+        "type": "pdf",
+        "title": "Curatorial Notes",
+        "description": "Sample PDF embed — replace pdfUrl in public/hotspots.json with a real document.",
+        "position": [
+            0.8,
+            1.6,
+            -4.6
+        ],
+        "pdfUrl": "./media/sample-document.pdf"
+    }
+]
