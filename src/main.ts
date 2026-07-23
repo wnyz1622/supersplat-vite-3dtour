@@ -525,9 +525,9 @@ app.on('update', tickCameraAnimation);
 // Hotspots
 // ---------------------------------------------------------------------------
 
-const ICON_DEFAULT = '/media/Info_default.png';
-const ICON_SELECTED = '/media/Info_Selected.png';
-const ICON_VISITED = '/media/Info_visited.png';
+const ICON_DEFAULT = `${import.meta.env.BASE_URL}media/Info_default.png`;
+const ICON_SELECTED = `${import.meta.env.BASE_URL}media/Info_Selected.png`;
+const ICON_VISITED = `${import.meta.env.BASE_URL}media/Info_visited.png`;
 const VISITED_STORAGE_KEY = 'grand-courts.hotspots.visited';
 
 type PlacedHotspot = {
@@ -855,9 +855,9 @@ resetViewBtn?.addEventListener('click', () => {
     flyToOrbitState(defaultOrbitState, CAMERA_FLY_DURATION);
 
     if (resetViewIcon) {
-        resetViewIcon.src = '/media/Reset_active.svg';
+        resetViewIcon.src = `${import.meta.env.BASE_URL}media/Reset_active.svg`;
         setTimeout(() => {
-            resetViewIcon.src = '/media/Reset_default.svg';
+            resetViewIcon.src = `${import.meta.env.BASE_URL}media/Reset_default.svg`;
         }, 300);
     }
 });
@@ -874,7 +874,9 @@ fullscreenBtn?.addEventListener('click', () => {
 
 document.addEventListener('fullscreenchange', () => {
     if (fullscreenIcon) {
-        fullscreenIcon.src = document.fullscreenElement ? '/media/Fullscreen_acitve.svg' : '/media/Fullscreen_default.svg';
+        fullscreenIcon.src = document.fullscreenElement
+            ? `${import.meta.env.BASE_URL}media/Fullscreen_acitve.svg`
+            : `${import.meta.env.BASE_URL}media/Fullscreen_default.svg`;
     }
 });
 
