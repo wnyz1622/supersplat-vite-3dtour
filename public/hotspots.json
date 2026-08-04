@@ -14,7 +14,6 @@
         "id": "gallery-photos",
         "type": "gallery",
         "title": "Gallery Views",
-        "description": "A few placeholder frames of the space — replace with real photography in public/hotspots.json.",
         "position": [
             5.2,
             2.2,
@@ -22,20 +21,28 @@
         ],
         "images": [
             {
-                "src": "data:image/svg+xml;utf8,%3Csvg%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%20width%3D%22640%22%20height%3D%22480%22%3E%3Crect%20width%3D%22640%22%20height%3D%22480%22%20fill%3D%22%234a5568%22%2F%3E%3Ctext%20x%3D%2250%25%22%20y%3D%2250%25%22%20font-family%3D%22Inter%2C%20sans-serif%22%20font-size%3D%2228%22%20fill%3D%22%23ffffff%22%20text-anchor%3D%22middle%22%20dominant-baseline%3D%22middle%22%3EImage%201%3C%2Ftext%3E%3C%2Fsvg%3E",
-                "caption": "Grand Court — north wall"
+                "src": "./media/photos-gallery1.jpg",
+                "caption": "Gallery view 1"
             },
             {
-                "src": "data:image/svg+xml;utf8,%3Csvg%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%20width%3D%22640%22%20height%3D%22480%22%3E%3Crect%20width%3D%22640%22%20height%3D%22480%22%20fill%3D%22%232d3748%22%2F%3E%3Ctext%20x%3D%2250%25%22%20y%3D%2250%25%22%20font-family%3D%22Inter%2C%20sans-serif%22%20font-size%3D%2228%22%20fill%3D%22%23ffffff%22%20text-anchor%3D%22middle%22%20dominant-baseline%3D%22middle%22%3EImage%202%3C%2Ftext%3E%3C%2Fsvg%3E",
-                "caption": "Grand Court — skylight ceiling"
+                "src": "./media/photos-gallery2.jpg",
+                "caption": "Gallery view 2"
             },
             {
-                "src": "data:image/svg+xml;utf8,%3Csvg%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%20width%3D%22640%22%20height%3D%22480%22%3E%3Crect%20width%3D%22640%22%20height%3D%22480%22%20fill%3D%22%233c4655%22%2F%3E%3Ctext%20x%3D%2250%25%22%20y%3D%2250%25%22%20font-family%3D%22Inter%2C%20sans-serif%22%20font-size%3D%2228%22%20fill%3D%22%23ffffff%22%20text-anchor%3D%22middle%22%20dominant-baseline%3D%22middle%22%3EImage%203%3C%2Ftext%3E%3C%2Fsvg%3E",
-                "caption": "Grand Court — sculpture hall"
+                "src": "./media/photos-gallery3.jpg",
+                "caption": "Gallery view 3"
             },
             {
-                "src": "data:image/svg+xml;utf8,%3Csvg%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%20width%3D%22640%22%20height%3D%22480%22%3E%3Crect%20width%3D%22640%22%20height%3D%22480%22%20fill%3D%22%231a202c%22%2F%3E%3Ctext%20x%3D%2250%25%22%20y%3D%2250%25%22%20font-family%3D%22Inter%2C%20sans-serif%22%20font-size%3D%2228%22%20fill%3D%22%23ffffff%22%20text-anchor%3D%22middle%22%20dominant-baseline%3D%22middle%22%3EImage%204%3C%2Ftext%3E%3C%2Fsvg%3E",
-                "caption": "Grand Court — entry stairs"
+                "src": "./media/photos-gallery4.jpg",
+                "caption": "Gallery view 4"
+            },
+            {
+                "src": "./media/photos-gallery5.jpg",
+                "caption": "Gallery view 5"
+            },
+            {
+                "src": "./media/photos-gallery6.jpg",
+                "caption": "Gallery view 6"
             }
         ]
     },
@@ -43,19 +50,17 @@
         "id": "gallery-video",
         "type": "video",
         "title": "Walkthrough Video",
-        "description": "Sample embed — replace videoUrl in public/hotspots.json with a real clip.",
         "position": [
             3,
             1.3,
             -2
         ],
-        "videoUrl": "https://commondatastorage.googleapis.com/gtv-videos-bucket/sample/BigBuckBunny.mp4"
+        "videoUrl": "./media/video-gallery.mp4"
     },
     {
         "id": "gallery-pdf",
         "type": "pdf",
         "title": "Curatorial Notes",
-        "description": "Sample PDF embed — replace pdfUrl in public/hotspots.json with a real document.",
         "position": [
             0.8,
             1.6,

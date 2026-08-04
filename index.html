@@ -35,7 +35,6 @@
         </div>
         <div id="hotspot-popup" class="hotspot-popup" data-open="false" role="dialog" aria-modal="false">
             <div class="hotspot-popup-header">
-                <img id="hotspot-popup-icon" class="hotspot-popup-icon" src="/media/Info_default.png" alt="" aria-hidden="true" />
                 <div id="hotspot-popup-title" class="hotspot-popup-title">Title</div>
                 <button id="hotspot-popup-close" class="hotspot-popup-close" type="button" aria-label="Close">
                     <img src="/media/Close.png" alt="" aria-hidden="true" />
@@ -70,6 +69,15 @@
                     <a id="hotspot-pdf-link" class="hotspot-open-link" href="#" target="_blank" rel="noopener">Open in new tab</a>
                 </div>
             </div>
+        </div>
+        <div id="hotspot-nav" class="hotspot-nav" aria-label="Hotspot navigation">
+            <button id="hotspot-prev" class="hotspot-nav-btn" type="button" aria-label="Previous point of interest">
+                <img src="/media/arrow_left.svg" alt="" aria-hidden="true" />
+            </button>
+            <div id="hotspot-nav-title" class="hotspot-nav-title" aria-live="polite"></div>
+            <button id="hotspot-next" class="hotspot-nav-btn" type="button" aria-label="Next point of interest">
+                <img src="/media/arrow_right.svg" alt="" aria-hidden="true" />
+            </button>
         </div>
         <div id="loader" role="status" aria-live="polite">
             <div class="loader-mark" aria-hidden="true"></div>

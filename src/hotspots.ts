@@ -11,8 +11,12 @@ export type HotspotData = {
     id: string;
     type: HotspotType;
     title: string;
-    /** Used by the info popup, and as a subtitle everywhere else. */
-    description: string;
+    /**
+     * Used by the info popup, and as a subtitle everywhere else. Optional —
+     * omit it on media hotspots where the title and the embed say enough, and
+     * the popup drops the paragraph entirely.
+     */
+    description?: string;
     /** World-space location of the marker, same coordinate frame as CAMERA_POSE in splat-config.ts. */
     position: [number, number, number];
     /**

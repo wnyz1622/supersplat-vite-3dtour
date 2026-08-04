@@ -528,7 +528,6 @@ app.on('update', tickCameraAnimation);
 const ICON_DEFAULT = `${import.meta.env.BASE_URL}media/Info_default.png`;
 const ICON_SELECTED = `${import.meta.env.BASE_URL}media/Info_Selected.png`;
 const ICON_VISITED = `${import.meta.env.BASE_URL}media/Info_visited.png`;
-const VISITED_STORAGE_KEY = 'grand-courts.hotspots.visited';
 
 type PlacedHotspot = {
     data: HotspotData;
@@ -539,7 +538,6 @@ type PlacedHotspot = {
 
 const hotspotsLayer = document.querySelector<HTMLDivElement>('#hotspots');
 const popupEl = document.querySelector<HTMLDivElement>('#hotspot-popup');
-const popupIconEl = document.querySelector<HTMLImageElement>('#hotspot-popup-icon');
 const popupTitleEl = document.querySelector<HTMLDivElement>('#hotspot-popup-title');
 const popupDescriptionEl = document.querySelector<HTMLParagraphElement>('#hotspot-popup-description');
 const popupCloseBtn = document.querySelector<HTMLButtonElement>('#hotspot-popup-close');
@@ -554,29 +552,32 @@ const galleryNextBtn = document.querySelector<HTMLButtonElement>('#gallery-next'
 const videoEl = document.querySelector<HTMLVideoElement>('#hotspot-video');
 const pdfFrameEl = document.querySelector<HTMLIFrameElement>('#hotspot-pdf');
 const pdfLinkEl = document.querySelector<HTMLAnchorElement>('#hotspot-pdf-link');
+const navEl = document.querySelector<HTMLDivElement>('#hotspot-nav');
+const navPrevBtn = document.querySelector<HTMLButtonElement>('#hotspot-prev');
+const navNextBtn = document.querySelector<HTMLButtonElement>('#hotspot-next');
+const navTitleEl = document.querySelector<HTMLDivElement>('#hotspot-nav-title');
 
-const loadVisitedIds = (): Set<string> => {
-    try {
-        const raw = localStorage.getItem(VISITED_STORAGE_KEY);
-        return new Set(raw ? (JSON.parse(raw) as string[]) : []);
-    } catch {
-        return new Set();
-    }
-};
-
-const visitedIds = loadVisitedIds();
-const saveVisitedIds = () => {
-    try {
-        localStorage.setItem(VISITED_STORAGE_KEY, JSON.stringify([...visitedIds]));
-    } catch {
-        // localStorage unavailable (private mode, etc.) — visited state just won't persist
-    }
-};
+// Session-only: visited markers dim while you explore, but every page load
+// starts clean so each visitor sees the scene in its default state.
+const visitedIds = new Set<string>();
 
 const placedHotspots: PlacedHotspot[] = [];
 let activeHotspot: PlacedHotspot | null = null;
 let hoveredHotspot: PlacedHotspot | null = null;
 let galleryIndex = 0;
+
+// -1 means "not started": the first Next lands on the first hotspot, the first
+// Prev wraps to the last one.
+const NAV_HINT = 'Use the arrows to explore';
+let navIndex = -1;
+
+const updateNavTitle = () => {
+    if (!navTitleEl) {
+        return;
+    }
+
+    navTitleEl.textContent = placedHotspots[navIndex]?.data.title ?? NAV_HINT;
+};
 
 const refreshHotspotIcon = (hotspot: PlacedHotspot) => {
     const isHighlighted = hotspot === activeHotspot || hotspot === hoveredHotspot;
@@ -637,7 +638,7 @@ const closePopup = () => {
 };
 
 const openPopup = (hotspot: PlacedHotspot) => {
-    if (!popupEl || !popupIconEl || !popupTitleEl || !popupDescriptionEl) {
+    if (!popupEl || !popupTitleEl || !popupDescriptionEl) {
         return;
     }
 
@@ -646,14 +647,18 @@ const openPopup = (hotspot: PlacedHotspot) => {
     }
 
     visitedIds.add(hotspot.data.id);
-    saveVisitedIds();
 
     activeHotspot = hotspot;
     refreshHotspotIcon(hotspot);
 
-    popupIconEl.src = ICON_SELECTED;
+    // Keep the arrows in step with clicks on the markers themselves.
+    navIndex = placedHotspots.indexOf(hotspot);
+    updateNavTitle();
+
     popupTitleEl.textContent = hotspot.data.title;
-    popupDescriptionEl.textContent = hotspot.data.description;
+    const description = hotspot.data.description ?? '';
+    popupDescriptionEl.textContent = description;
+    popupDescriptionEl.hidden = description === '';
 
     bodyGallery?.classList.toggle('is-active', hotspot.data.type === 'gallery');
     bodyVideo?.classList.toggle('is-active', hotspot.data.type === 'video');
@@ -742,6 +747,23 @@ const handleHotspotClick = (hotspot: PlacedHotspot) => {
     flyToPose(pose, CAMERA_FLY_DURATION);
     openPopup(hotspot);
 };
+
+// Wraps in both directions, so the arrows loop through the tour endlessly.
+const stepHotspot = (delta: number) => {
+    const count = placedHotspots.length;
+    if (count === 0) {
+        return;
+    }
+
+    const next = navIndex === -1
+        ? (delta > 0 ? 0 : count - 1)
+        : (navIndex + delta + count) % count;
+
+    handleHotspotClick(placedHotspots[next]);
+};
+
+navPrevBtn?.addEventListener('click', () => stepHotspot(-1));
+navNextBtn?.addEventListener('click', () => stepHotspot(1));
 
 const toHotspotVec = new Vec3();
 const hotspotScreenPoint = new Vec3();
@@ -835,6 +857,13 @@ try {
 } catch (error) {
     console.error('Failed to load hotspots.json', error);
 }
+
+// Nothing to step through if hotspots.json was empty or failed to load.
+if (navEl) {
+    navEl.hidden = placedHotspots.length === 0;
+}
+updateNavTitle();
+
 app.on('update', updateHotspots);
 
 // ---------------------------------------------------------------------------
@@ -853,6 +882,10 @@ resetViewBtn?.addEventListener('click', () => {
 
     closePopup();
     flyToOrbitState(defaultOrbitState, CAMERA_FLY_DURATION);
+
+    // Reset view puts the tour back at the start, so the arrows start over too.
+    navIndex = -1;
+    updateNavTitle();
 
     if (resetViewIcon) {
         resetViewIcon.src = `${import.meta.env.BASE_URL}media/Reset_active.svg`;

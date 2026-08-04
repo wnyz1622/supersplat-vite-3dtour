@@ -260,15 +260,13 @@ kbd {
     }
 }
 
-@media (max-width: 520px) {
+/* Phones (portrait) and short landscape phones. Keep this condition in sync
+   with the popup-centering block at the end of this file. */
+@media (max-width: 600px), (max-height: 480px) and (orientation: landscape) {
+    /* Keyboard/mouse hints are meaningless on touch, and the panel eats a
+       large share of a small viewport. */
     #controls {
-        right: 16px;
-        bottom: 12px;
-        width: auto;
-    }
-
-    .control-list {
-        grid-template-columns: 1fr;
+        display: none;
     }
 }
 
@@ -278,12 +276,13 @@ kbd {
 
 .view-controls {
     position: fixed;
-    top: 16px;
+    top: 50%;
     right: 16px;
     z-index: 550;
     display: flex;
     flex-direction: column;
     gap: 10px;
+    transform: translateY(-50%);
 }
 
 .view-control-btn {
@@ -313,6 +312,91 @@ kbd {
 
 .view-control-btn:hover img {
     background: #c4c4c4;
+}
+
+/* ---------------------------------------------------------------------- */
+/* Hotspot navigation (bottom arrows)                                     */
+/* ---------------------------------------------------------------------- */
+
+.hotspot-nav {
+    position: fixed;
+    bottom: 20px;
+    left: 50%;
+    z-index: 550;
+    display: flex;
+    align-items: center;
+    gap: 4px;
+    padding: 5px;
+    transform: translateX(-50%);
+    border-radius: 30px;
+    outline: 1px solid #9e9e9e;
+    background: #d4d4d4;
+    user-select: none;
+}
+
+.hotspot-nav[hidden] {
+    display: none;
+}
+
+.hotspot-nav-btn {
+    display: flex;
+    width: 36px;
+    height: 36px;
+    flex-shrink: 0;
+    align-items: center;
+    justify-content: center;
+    padding: 0;
+    border: 0;
+    border-radius: 50%;
+    background: transparent;
+    cursor: pointer;
+    transition: background 0.15s ease;
+}
+
+.hotspot-nav-btn:hover {
+    background: #c4c4c4;
+}
+
+.hotspot-nav-btn img {
+    display: block;
+    width: 20px;
+    height: 20px;
+    /* The shared arrow SVGs are hard-coded to #333; lift them to the title's
+       #6b6b6b so the pill reads as one colour. Both are neutral greys, so a
+       brightness multiply is exact: 0x33 (51) * 2.1 = 107 = 0x6b. */
+    filter: brightness(2.1);
+}
+
+.hotspot-nav-title {
+    /* Fixed width so the pill doesn't resize as titles change length. */
+    width: 170px;
+    padding: 4px 10px;
+    overflow: hidden;
+    color: #6b6b6b;
+    font-size: 12px;
+    font-weight: 600;
+    line-height: 1.3;
+    text-align: center;
+    /* Clamp to two lines — long titles wrap instead of stretching the pill. */
+    display: -webkit-box;
+    -webkit-line-clamp: 2;
+    line-clamp: 2;
+    -webkit-box-orient: vertical;
+}
+
+@media (max-width: 520px) {
+    .hotspot-nav {
+        right: 0;
+        bottom: 0;
+        left: 0;
+        justify-content: space-between;
+        padding: 6px 12px;
+        transform: none;
+        border-top: 1px solid #9e9e9e;
+        border-radius: 0;
+        outline: none;
+        box-sizing: border-box;
+    }
 }
 
 /* ---------------------------------------------------------------------- */
@@ -415,12 +499,6 @@ kbd {
     -webkit-backdrop-filter: blur(10px);
 }
 
-.hotspot-popup-icon {
-    width: 22px;
-    height: 22px;
-    flex: 0 0 auto;
-}
-
 .hotspot-popup-title {
     overflow: hidden;
     min-width: 0;
@@ -452,8 +530,10 @@ kbd {
 }
 
 .hotspot-popup-close img {
-    width: 12px;
-    height: 12px;
+    /* Nearly fills the 26px button — the glyph carries its own padding, so the
+       drawn X still clears the circle edge. */
+    width: 22px;
+    height: 22px;
     filter: brightness(0) invert(1);
 }
 
@@ -603,20 +683,32 @@ kbd {
     background: #d4452e;
 }
 
-@media (max-width: 600px) {
+@media (max-width: 600px), (max-height: 480px) and (orientation: landscape) {
+    /* Centred in the viewport rather than tethered to its marker — on a small
+       screen the popup covers most of the width anyway, so anchoring it just
+       pushed it against an edge. The --popup-x/y vars JS keeps writing are
+       simply not read here. */
     .hotspot-popup {
-        top: auto;
-        right: 12px;
-        bottom: 12px;
-        left: 12px;
-        width: auto;
-        max-width: none;
-        transform: translateY(16px) scale(0.98);
-        transform-origin: bottom center;
+        top: 50%;
+        right: auto;
+        bottom: auto;
+        left: 50%;
+        transform: translate(-50%, -50%) scale(0.96);
+        transform-origin: center;
+    }
+
+    /* Beats the base .hotspot-popup.flip-left origin (two classes). */
+    .hotspot-popup.flip-left {
+        transform-origin: center;
     }
 
     .hotspot-popup[data-open='true'] {
-        transform: translateY(0) scale(1);
+        transform: translate(-50%, -50%) scale(1);
+    }
+
+    /* Keep the centred popup clear of the bottom nav bar. */
+    .hotspot-popup-body {
+        max-height: 50vh;
     }
 
     /* larger touch target than the desktop 32px marker */
