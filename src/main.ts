@@ -598,11 +598,27 @@ const setGalleryImage = (hotspot: PlacedHotspot, index: number) => {
 
     galleryIndex = (index + images.length) % images.length;
     const image = images[galleryIndex];
+
+    // Full-size photos take a moment over the network; fade each one in on load
+    // instead of letting it pop in mid-paint.
+    galleryImageEl.classList.remove('is-loaded');
     galleryImageEl.src = image.src;
     galleryImageEl.alt = image.caption;
     galleryCaptionEl.textContent = image.caption;
     galleryCounterEl.textContent = `${galleryIndex + 1} / ${images.length}`;
+
+    // Warm the browser cache for the neighbours so paging feels instant.
+    for (const offset of [1, -1]) {
+        const neighbour = images[(galleryIndex + offset + images.length) % images.length];
+        if (neighbour !== image) {
+            new Image().src = neighbour.src;
+        }
+    }
 };
+
+galleryImageEl?.addEventListener('load', () => {
+    galleryImageEl.classList.add('is-loaded');
+});
 
 galleryPrevBtn?.addEventListener('click', () => {
     if (activeHotspot?.data.type === 'gallery') {
@@ -679,6 +695,25 @@ const openPopup = (hotspot: PlacedHotspot) => {
 popupCloseBtn?.addEventListener('click', closePopup);
 window.addEventListener('keydown', (event) => {
     if (event.key === 'Escape') {
+        closePopup();
+    }
+});
+
+// Tap the scene to dismiss. Touch devices have no Escape key, so without this
+// the close button is the only way out. Tracked as a press/release pair so an
+// orbit or pan drag — which also ends in a click on the canvas — doesn't count.
+const TAP_SLOP_PX = 6;
+let pointerDownX = 0;
+let pointerDownY = 0;
+
+canvas?.addEventListener('pointerdown', (event) => {
+    pointerDownX = event.clientX;
+    pointerDownY = event.clientY;
+});
+
+canvas?.addEventListener('pointerup', (event) => {
+    const moved = Math.hypot(event.clientX - pointerDownX, event.clientY - pointerDownY);
+    if (moved <= TAP_SLOP_PX) {
         closePopup();
     }
 });

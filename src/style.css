@@ -328,9 +328,15 @@ kbd {
     gap: 4px;
     padding: 5px;
     transform: translateX(-50%);
-    border-radius: 30px;
-    outline: 1px solid #9e9e9e;
+    /* border, not outline: an outline is painted as a separate pass outside the
+       border box and anti-aliases poorly around a tight radius, which reads as a
+       jagged//low-res edge on the pill's rounded ends. */
+    border: 1px solid #9e9e9e;
+    /* 999px pins the ends to true semicircles at any height; 30px was being
+       clamped anyway and left the curve dependent on the pill's height. */
+    border-radius: 999px;
     background: #d4d4d4;
+    box-sizing: border-box;
     user-select: none;
 }
 
@@ -392,10 +398,10 @@ kbd {
         justify-content: space-between;
         padding: 6px 12px;
         transform: none;
+        /* full-width bar: only the top edge is drawn */
+        border: 0;
         border-top: 1px solid #9e9e9e;
         border-radius: 0;
-        outline: none;
-        box-sizing: border-box;
     }
 }
 
@@ -586,6 +592,12 @@ kbd {
     width: 100%;
     height: 100%;
     object-fit: cover;
+    opacity: 0;
+    transition: opacity 0.2s ease;
+}
+
+.gallery-image.is-loaded {
+    opacity: 1;
 }
 
 .gallery-nav {
